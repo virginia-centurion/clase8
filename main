@@ -1,0 +1,65 @@
+
+import json
+
+def obtener_agenda_cliente():
+    try:
+        with open(f'agenda_cliente.json', 'r') as archivo:
+            return json.load(archivo)
+    except FileNotFoundError as e:
+        return []
+
+def agendar_cliente():
+    agenda_cliente = obtener_agenda_cliente()
+    cliente = {
+        'nombre': input('Ingrese su nombre: '),
+        'apellido': input('Ingrese su apellido: '),
+        'edad': input('Ingrese su edad:'),
+        'dni': input('Ingrese su Documento Nacional de Identidad:'),
+        'telefono': input('Ingrese su telefono: '),
+        'correoelectronico': input('Ingrese su direccion de correo electronico: '),
+    }
+    agenda_cliente.append(cliente)
+    with open(f'agenda_cliente.json', 'w') as archivo:
+        json.dump(agenda_cliente, archivo, indent=4)
+        
+def ver_cliente():
+    nombre_a_buscar = input('Ingrese nombre: ')
+    apellido_a_buscar = input('Ingrese apellido: ')
+    agenda_cliente = obtener_agenda_cliente()
+    for cliente in agenda_cliente:
+        if cliente['nombre'] != nombre_a_buscar or cliente['apellido'] != apellido_a_buscar:
+            continue
+        print(f"""
+    Nombre: {cliente['nombre']}
+    Apellido: {cliente['apellido']}
+    Edad: {cliente['edad']}
+    DNI: {cliente['dni']}
+    Telefono: {cliente['telefono']}
+    Correo electronico: {cliente['correoelectronico']}
+    """)
+        break
+    else:
+        print(f'No se encontro el cliente {nombre_a_buscar} {apellido_a_buscar}.')
+
+def menu():
+  print('''Menu
+  1. Agendar nuevo cliente.
+  2. Ver cliente.
+  ''')
+  opcion = input('Ingrese opcion: ')
+  if opcion not in ['1','2']:
+    print('No ingreso ninguna opcion valida.')
+    return
+  if opcion == '1':
+    agendar_cliente ()
+  elif opcion == '2':
+    ver_cliente ()
+
+menu()
+
+
+
+
+
+
+
