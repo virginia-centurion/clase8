@@ -5,6 +5,9 @@ from clases import Alumno
 # Crear una instancia de Alumno, mostrando sus datos y llamando al método desde otro módulo.
 
 alumno = Alumno('Ricardo', '7')
-print(alumno.nombre)
-print(alumno.nota)
-print(alumno.imprimir())
+alumno2 = Alumno('julian','9')
+alumno.imprimir()
+alumno2.imprimir()
+#print(alumno.nombre)
+#print(alumno.nota)
+#print(alumno.imprimir())
